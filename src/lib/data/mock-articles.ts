@@ -1,4 +1,4 @@
-import { Article, ArticleCategory, NEIGHBORHOODS, RichContent } from '@/lib/data/types';
+import { Article, ArticleCategory, NEIGHBORHOODS, RichContent, IMPACT_LEVELS } from '@/lib/data/types';
 
 // Add this rich content template that we'll reuse
 const sharedRichContent: RichContent = {
@@ -102,6 +102,9 @@ const sharedRichContent: RichContent = {
   ]
 };
 
+// Add this type definition at the top with your other imports
+type StorySize = 'small' | 'medium' | 'large';
+
 export const mockArticles: Article[] = [
   {
     id: '1',
@@ -142,8 +145,8 @@ export const mockArticles: Article[] = [
     viewCount: 15678,
     isFeatured: true,
     neighborhoodImage: '/images/neighborhoods/gastown.webp',
-    impact: 'high',
-    size: 'large',
+    impact: IMPACT_LEVELS.HIGH,
+    size: 'large' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -185,8 +188,8 @@ export const mockArticles: Article[] = [
     viewCount: 23456,
     isFeatured: true,
     neighborhoodImage: '/images/neighborhoods/kitsilano.webp',
-    impact: 'medium',
-    size: 'medium',
+    impact: IMPACT_LEVELS.MEDIUM,
+    size: 'medium' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -228,8 +231,8 @@ export const mockArticles: Article[] = [
     viewCount: 34567,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/richmond.webp',
-    impact: 'low',
-    size: 'small',
+    impact: IMPACT_LEVELS.LOW,
+    size: 'small' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -271,8 +274,8 @@ export const mockArticles: Article[] = [
     viewCount: 45678,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/downtown.webp',
-    impact: 'high',
-    size: 'large',
+    impact: IMPACT_LEVELS.HIGH,
+    size: 'large' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -294,7 +297,7 @@ export const mockArticles: Article[] = [
       whyCare: "Free transit passes, bike-share memberships, and other perks up for grabs.",
     },
     category: 'sustainability' as ArticleCategory,
-    neighborhood: 'citywide',
+    neighborhood: NEIGHBORHOODS.CITYWIDE,
     publishedAt: '2024-03-11T14:20:00Z',
     updatedAt: '2024-03-11T14:20:00Z',
     imageUrl: '/images/climate-action.webp',
@@ -314,8 +317,8 @@ export const mockArticles: Article[] = [
     viewCount: 23456,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/citywide.webp',
-    impact: 'medium',
-    size: 'medium',
+    impact: IMPACT_LEVELS.MEDIUM,
+    size: 'medium' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -337,7 +340,7 @@ export const mockArticles: Article[] = [
       whyCare: "Finally, somewhere cool to take your foodie friends visiting from out of town.",
     },
     category: 'food' as ArticleCategory,
-    neighborhood: 'gastown',
+    neighborhood: NEIGHBORHOODS.GASTOWN,
     publishedAt: '2024-03-10T11:00:00Z',
     updatedAt: '2024-03-10T11:00:00Z',
     imageUrl: '/images/chinatown-popups.webp',
@@ -357,8 +360,8 @@ export const mockArticles: Article[] = [
     viewCount: 19876,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/chinatown.webp',
-    impact: 'medium',
-    size: 'medium',
+    impact: IMPACT_LEVELS.MEDIUM,
+    size: 'medium' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -380,7 +383,7 @@ export const mockArticles: Article[] = [
       whyCare: "Finally, a legit venue for competitive gaming and tech events in Metro Van.",
     },
     category: 'tech-and-innovation' as ArticleCategory,
-    neighborhood: 'citywide',
+    neighborhood: NEIGHBORHOODS.CITYWIDE,
     publishedAt: '2024-03-09T16:30:00Z',
     updatedAt: '2024-03-09T16:30:00Z',
     imageUrl: '/images/esports-arena.webp',
@@ -400,8 +403,8 @@ export const mockArticles: Article[] = [
     viewCount: 28945,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/surrey.webp',
-    impact: 'high',
-    size: 'large',
+    impact: IMPACT_LEVELS.HIGH,
+    size: 'large' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -423,7 +426,7 @@ export const mockArticles: Article[] = [
       whyCare: "Finally, solo living might be affordable (if you can handle the squeeze).",
     },
     category: 'housing' as ArticleCategory,
-    neighborhood: 'mount-pleasant',
+    neighborhood: NEIGHBORHOODS.MOUNT_PLEASANT,
     publishedAt: '2024-03-08T09:45:00Z',
     updatedAt: '2024-03-08T09:45:00Z',
     imageUrl: '/images/micro-apartments.webp',
@@ -443,8 +446,8 @@ export const mockArticles: Article[] = [
     viewCount: 34567,
     isFeatured: true,
     neighborhoodImage: '/images/neighborhoods/mount-pleasant.webp',
-    impact: 'high',
-    size: 'large',
+    impact: IMPACT_LEVELS.HIGH,
+    size: 'large' as StorySize,
     richContent: sharedRichContent,
   },
   {
@@ -466,7 +469,7 @@ export const mockArticles: Article[] = [
       whyCare: "Earn rewards while helping the environment - plus, great for meeting people!",
     },
     category: 'sustainability' as ArticleCategory,
-    neighborhood: 'kitsilano',
+    neighborhood: NEIGHBORHOODS.KITSILANO,
     publishedAt: '2024-03-07T13:15:00Z',
     updatedAt: '2024-03-07T13:15:00Z',
     imageUrl: '/images/beach-cleanup.webp',
@@ -486,8 +489,8 @@ export const mockArticles: Article[] = [
     viewCount: 15678,
     isFeatured: false,
     neighborhoodImage: '/images/neighborhoods/kitsilano.webp',
-    impact: 'medium',
-    size: 'small',
+    impact: IMPACT_LEVELS.MEDIUM,
+    size: 'small' as StorySize,
     richContent: sharedRichContent,
   }
 ].map(article => ({
