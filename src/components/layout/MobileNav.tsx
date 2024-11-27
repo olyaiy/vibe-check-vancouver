@@ -34,7 +34,7 @@ export function MobileNav({ items }: MobileNavProps) {
         <nav className="flex flex-col space-y-4">
           {items.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="text-lg font-medium hover:text-primary"
               onClick={() => setOpen(false)}

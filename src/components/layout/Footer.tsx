@@ -2,21 +2,21 @@ import Link from "next/link";
 
 const footerLinks = {
   explore: [
-    { label: "Latest News", href: "/news" },
-    { label: "Neighborhoods", href: "/neighborhoods" },
-    { label: "Food + Drink", href: "/food-drink" },
-    { label: "Events", href: "/events" },
-    { label: "Housing", href: "/housing" },
+    { label: "Latest News", href: "/" },
+    { label: "Neighborhoods", href: "/" },
+    { label: "Food + Drink", href: "/" },
+    { label: "Events", href: "/" },
+    { label: "Housing", href: "/" },
   ],
   connect: [
-    { label: "About Us", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Submit a Story", href: "/submit" },
-    { label: "Advertise", href: "/advertise" },
+    { label: "About Us", href: "/" },
+    { label: "Contact", href: "/" },
+    { label: "Submit a Story", href: "/" },
+    { label: "Advertise", href: "/" },
   ],
   legal: [
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Use", href: "/terms" },
+    { label: "Privacy Policy", href: "/" },
+    { label: "Terms of Use", href: "/" },
   ],
 } as const;
 
@@ -32,13 +32,13 @@ export function Footer() {
               Your daily pulse check on Vancouver's culture and news, made for Gen Z.
             </p>
             <div className="flex space-x-4">
-              <a href="https://twitter.com/vibecheckyvr" className="text-foreground/70 hover:text-foreground">
+              <a href="/" className="text-foreground/70 hover:text-foreground">
                 𝕏
               </a>
-              <a href="https://instagram.com/vibecheckyvr" className="text-foreground/70 hover:text-foreground">
+              <a href="/" className="text-foreground/70 hover:text-foreground">
                 Instagram
               </a>
-              <a href="https://tiktok.com/@vibecheckyvr" className="text-foreground/70 hover:text-foreground">
+              <a href="/" className="text-foreground/70 hover:text-foreground">
                 TikTok
               </a>
             </div>
@@ -49,7 +49,7 @@ export function Footer() {
             <h3 className="font-medium">Explore</h3>
             <ul className="space-y-2">
               {footerLinks.explore.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link 
                     href={link.href}
                     className="text-sm text-foreground/70 hover:text-foreground transition-colors"
@@ -66,7 +66,7 @@ export function Footer() {
             <h3 className="font-medium">Connect</h3>
             <ul className="space-y-2">
               {footerLinks.connect.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link 
                     href={link.href}
                     className="text-sm text-foreground/70 hover:text-foreground transition-colors"
@@ -97,7 +97,7 @@ export function Footer() {
             <div className="flex gap-6">
               {footerLinks.legal.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   className="text-sm text-foreground/70 hover:text-foreground transition-colors"
                 >

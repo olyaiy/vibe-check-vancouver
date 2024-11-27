@@ -2,11 +2,11 @@ import Link from "next/link";
 import { MobileNav } from "@/components/layout/MobileNav";
 
 const navItems = [
-  { label: "Latest", href: "/news" },
-  { label: "Neighborhoods", href: "/neighborhoods" },
-  { label: "Food + Drink", href: "/food-drink" },
-  { label: "Events", href: "/events" },
-  { label: "Housing", href: "/housing" },
+  { label: "Latest", href: "/" },
+  { label: "Neighborhoods", href: "/" },
+  { label: "Food + Drink", href: "/" },
+  { label: "Events", href: "/" },
+  { label: "Housing", href: "/" },
 ] as const;
 
 
@@ -30,7 +30,7 @@ export function Navbar() {
         <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="transition-colors hover:text-foreground hover:opacity-100 text-foreground/70"
             >

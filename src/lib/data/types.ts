@@ -61,17 +61,28 @@ export interface EngagementMetrics {
   clickThroughRate?: number;
 }
 
-export type ArticleCategory = typeof ARTICLE_CATEGORIES[keyof typeof ARTICLE_CATEGORIES];
+export type ArticleCategory = 
+  | 'housing'
+  | 'transit'
+  | 'food'
+  | 'tech-and-innovation'
+  | 'sustainability';
+
 export type Neighborhood = typeof NEIGHBORHOODS[keyof typeof NEIGHBORHOODS];
 export type ImpactLevel = typeof IMPACT_LEVELS[keyof typeof IMPACT_LEVELS];
 
 type StorySize = 'small' | 'medium' | 'large';
 
+export interface TLDR {
+  summary: string;
+  points: string[];
+}
+
 export interface Article extends EngagementMetrics {
   id: string;
   slug: string;
   title: string;
-  tldr: string;
+  tldr: TLDR;
   content: ArticleContent;
   category: ArticleCategory;
   neighborhood: Neighborhood;
@@ -97,6 +108,7 @@ export interface Article extends EngagementMetrics {
   isPremium?: boolean;
   lastReadPosition?: number; // For "continue reading" feature
   size?: StorySize;
+  richContent: RichContent;
 }
 
 // Analytics types
@@ -142,4 +154,21 @@ export interface ContentModeration {
   moderationDate?: string;
   flags?: string[];
   notes?: string;
+}
+
+export interface RichContentSection {
+  type: 'header' | 'paragraph' | 'quote' | 'bulletPoints' | 'steps' | 'callout';
+  content: string;
+  level?: number;
+  attribution?: string;
+  items?: string[];
+  style?: 'info' | 'warning' | 'success' | 'error';
+}
+
+export interface RichContent {
+  sections: RichContentSection[];
+  relatedArticles: {
+    title: string;
+    slug: string;
+  }[];
 }

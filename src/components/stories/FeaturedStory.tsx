@@ -49,7 +49,7 @@ export function FeaturedStory() {
               <p className="font-satoshi text-lg text-white/80 group-hover:text-white/100 
                 transition-colors duration-200"
               >
-                {featuredArticle.tldr}
+                {featuredArticle.tldr.summary}
               </p>
             </div>
 

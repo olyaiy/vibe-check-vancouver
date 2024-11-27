@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { CalendarDays, MessageCircle, Share2, Bookmark, Eye } from "lucide-react";
 import { cn, formatNumber } from "@/lib/utils";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 interface StoryCardProps {
   article: Article;
@@ -43,103 +42,105 @@ export function StoryCard({
   const styles = categoryStyles[article.category] || categoryStyles.default;
 
   return (
-    <Link href={`/news/${article.slug}`} className="block">
-      <Card className={cn(
-        "group relative overflow-hidden bg-card transition-all duration-300 border-0",
-        "hover:ring-2 hover:ring-primary/50 hover:-translate-y-1",
-        "active:translate-y-0 active:ring-primary/70",
-        "cursor-pointer",
-        className
+    <Card className={cn(
+      "group relative overflow-hidden bg-card hover:bg-accent/5 transition-all duration-300 border-0",
+      className
+    )}>
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src={article.imageUrl}
+          alt={article.title}
+          fill
+          priority={priority}
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div className={cn(
+          "absolute inset-0",
+          variant === 'hero' 
+            ? "bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+            : "bg-gradient-to-t from-black/80 to-transparent"
+        )} />
+      </div>
+
+      {/* Content Layout based on variant */}
+      <div className={cn(
+        "relative h-full w-full",
+        variant === 'hero' && "p-8",
+        variant === 'secondary' && "p-6",
+        variant === 'compact' && "p-4"
       )}>
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src={article.imageUrl}
-            alt={article.title}
-            fill
-            priority={priority}
-            className="object-cover transition-all duration-300 group-hover:scale-105 group-hover:brightness-110"
-          />
-          <div className={cn(
-            "absolute inset-0 transition-opacity duration-300",
-            variant === 'hero' 
-              ? "bg-gradient-to-t from-black/90 via-black/50 to-transparent group-hover:via-black/40"
-              : "bg-gradient-to-t from-black/80 to-transparent group-hover:from-black/90",
-          )} />
+        {/* Category & Impact Badge */}
+        <div className="flex items-center justify-between mb-auto">
+          <Badge className={cn(
+            "bg-white/10 backdrop-blur-md text-white border-none",
+            variant === 'hero' ? "px-4 py-2" : "px-3 py-1.5"
+          )}>
+            {article.category}
+          </Badge>
+          
+          {variant !== 'compact' && (
+            <Badge variant="secondary" className={getImpactStyles(article.impact)}>
+              {`${article.impact.charAt(0).toUpperCase() + article.impact.slice(1)} Impact`}
+            </Badge>
+          )}
         </div>
 
-        {/* Content Layout */}
+        {/* Title & Content Area */}
         <div className={cn(
-          "relative h-full w-full flex flex-col justify-between",
+          "absolute bottom-0 left-0 right-0",
           variant === 'hero' && "p-8",
           variant === 'secondary' && "p-6",
           variant === 'compact' && "p-4"
         )}>
-          {/* Top Section */}
-          <div className="flex items-center justify-between">
-            <Badge className={cn(
-              "bg-white/10 backdrop-blur-md text-white border-none transition-all",
-              "group-hover:bg-white/20",
-              variant === 'hero' ? "px-4 py-2" : "px-3 py-1.5"
-            )}>
-              {article.category}
-            </Badge>
-            
-            {variant !== 'compact' && (
-              <Badge variant="secondary" className={getImpactStyles(article.impact)}>
-                {`${article.impact.charAt(0).toUpperCase() + article.impact.slice(1)} Impact`}
-              </Badge>
-            )}
-          </div>
-
-          {/* Bottom Section */}
-          <div className={cn(
-            "space-y-4",
-            variant === 'hero' && "mt-auto",
-            variant === 'secondary' && "mt-auto",
-            variant === 'compact' && "mt-auto"
+          <h2 className={cn(
+            "font-bold leading-tight group-hover:text-primary/90 transition-colors",
+            variant === 'hero' && "text-3xl md:text-4xl mb-4",
+            variant === 'secondary' && "text-2xl mb-3",
+            variant === 'compact' && "text-xl mb-2"
           )}>
-            <h2 className={cn(
-              "font-bold leading-tight text-white transition-colors duration-300",
-              "group-hover:text-primary-foreground group-hover:drop-shadow-lg",
-              variant === 'hero' && "text-3xl md:text-4xl",
-              variant === 'secondary' && "text-2xl",
-              variant === 'compact' && "text-xl"
-            )}>
-              {article.title}
-            </h2>
+            {article.title}
+          </h2>
 
-            {variant !== 'compact' && (
-              <p className="text-white/80 text-sm leading-relaxed line-clamp-2 group-hover:text-white/90">
-                {article.tldr}
+          {variant !== 'compact' && (
+            <div className="space-y-2 mb-6">
+              <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
+                {article.tldr.summary}
               </p>
-            )}
+              {variant === 'hero' && (
+                <ul className="text-white/70 text-xs space-y-1">
+                  {article.tldr.points.slice(0, 2).map((point, index) => (
+                    <li key={index} className="line-clamp-1">• {point}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
 
-            {/* Metadata Footer */}
-            <div className="flex items-center justify-between text-sm text-white/80">
-              <div className="flex items-center gap-4">
-                {variant === 'hero' && (
-                  <>
-                    <span className="flex items-center gap-1.5 group-hover:text-white/90">
-                      <Eye className="h-4 w-4" />
-                      {formatNumber(article.viewCount)}
-                    </span>
-                    <span className="flex items-center gap-1.5 group-hover:text-white/90">
-                      <MessageCircle className="h-4 w-4" />
-                      {article.commentCount}
-                    </span>
-                  </>
-                )}
-                <span className="flex items-center gap-1.5 group-hover:text-white/90">
-                  <CalendarDays className="h-4 w-4" />
-                  {new Date(article.publishedAt).toLocaleDateString()}
-                </span>
-              </div>
+          {/* Metadata Footer */}
+          <div className="flex items-center justify-between text-sm text-white/80">
+            <div className="flex items-center gap-4">
+              {variant === 'hero' && (
+                <>
+                  <span className="flex items-center gap-1.5">
+                    <Eye className="h-4 w-4" />
+                    {formatNumber(article.viewCount)}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <MessageCircle className="h-4 w-4" />
+                    {article.commentCount}
+                  </span>
+                </>
+              )}
+              <span className="flex items-center gap-1.5">
+                <CalendarDays className="h-4 w-4" />
+                {new Date(article.publishedAt).toLocaleDateString()}
+              </span>
             </div>
           </div>
         </div>
-      </Card>
-    </Link>
+      </div>
+    </Card>
   );
 }
 
