@@ -70,56 +70,56 @@ Maintaining journalistic integrity while simplifying content
 
 # Structure
 vibe-check-vancouver/
-├── app/
-│   ├── layout.tsx           # Root layout with navigation/footer
-│   ├── page.tsx             # Homepage with featured stories
-│   ├── news/                # News section
-│   │   ├── page.tsx         # All news listing (potentially paginated)
-│   │   ├── layout.tsx       # News layout wrapper
-│   │   └── [slug]/          # Individual news pages
-│   │       └── page.tsx     
-│   ├── tags/                # Tag browsing
-│   │   └── [tag]/
-│   │       └── page.tsx
-│   └── neighborhoods/       # Neighborhood specific news
-│       └── [area]/
-│           └── page.tsx
-├── components/
-│   ├── stories/            # Story components
-│   │   ├── StoryCard.tsx  
-│   │   ├── StoryGrid.tsx
-│   │   └── StoryViewer.tsx
-│   ├── layout/
-│   │   ├── Navigation.tsx
-│   │   └── Footer.tsx
-│   └── ui/                 # shadcn components
-│       ├── button.tsx
-│       └── card.tsx
-├── lib/
-│   ├── actions/           # Server actions
-│   │   ├── stories.ts    # Story-related actions
-│   │   └── claude.ts     # AI processing actions
-│   ├── db/               # Database setup
-│   │   └── index.ts
-│   └── utils/            # Helper functions
-│       ├── ai.ts         # AI processing utilities
-│       └── format.ts     # Data formatting
-├── public/               # Static assets
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx           # Root layout with navigation/footer
+│   │   ├── page.tsx             # Homepage with featured stories
+│   │   ├── news/                # News section
+│   │   │   ├── page.tsx         # All news listing (potentially paginated)
+│   │   │   ├── layout.tsx       # News layout wrapper
+│   │   │   └── [slug]/          # Individual news pages
+│   │   │       └── page.tsx     
+│   │   ├── tags/                # Tag browsing
+│   │   │   └── [tag]/
+│   │   │       └── page.tsx
+│   │   └── neighborhoods/       # Neighborhood specific news
+│   │       └── [area]/
+│   │           └── page.tsx
+│   ├── components/
+│   │   ├── stories/            # Story components
+│   │   │   ├── StoryCard.tsx  
+│   │   │   ├── StoryGrid.tsx
+│   │   │   └── StoryViewer.tsx
+│   │   ├── layout/
+│   │   │   ├── Navigation.tsx
+│   │   │   └── Footer.tsx
+│   │   └── ui/                 # shadcn components
+│   │       ├── button.tsx
+│   │       └── card.tsx
+│   └── lib/
+│       ├── actions/           # Server actions
+│       │   ├── stories.ts    # Story-related actions
+│       │   └── claude.ts     # AI processing actions
+│       ├── data/             # New directory for mock/static data
+│       │   ├── mock-articles.ts # Mock news articles
+│       │   └── types.ts      # TypeScript types    
+│       ├── db/               # Database setup
+│       │   └── index.ts
+│       └── utils/            # Helper functions
+│           ├── ai.ts         # AI 
+processing utilities
+│           └── format.ts     # Data formatting
+├── public/                   # Static assets
 │   ├── images/
 │   └── icons/
-├── styles/              
-│   └── globals.css       # Global styles + Tailwind
-├── types/               # TypeScript types
-│   └── index.ts
 ├── .env
 ├── .env.example
 ├── .gitignore
 ├── next.config.js
 ├── package.json
 ├── postcss.config.js
-├── tailwind.config.js
+├── tailwind.config.ts
 └── tsconfig.json
-
 
 ##SEO Strategy
 ### Metadata Optimization
@@ -156,3 +156,59 @@ vibe-check-vancouver/
 - Proper handling of canonical URLs
 - Dynamic OG images per route
 - Automated 301 redirects handling
+
+
+
+##Design System
+
+###Typography
+- Headlines: Clash Display (Variable) - Bold, modern sans-serif
+- Body: Satoshi (Variable) - Clean, readable sans-serif
+- Scale: 14px/1rem base, 1.25 ratio
+
+###Colors
+- Primary: Purple (#C17BFF) - Brand, CTAs
+- Secondary: Teal (#20E3B2) - Accents, highlights
+- Neutrals: Cool grays - Text, backgrounds
+- Charts: 5-color palette for data viz
+- Dark mode optimized
+
+###CSS Variables
+/ Light mode /
+--background: 240 10% 98%
+--foreground: 240 10% 3.9%
+--primary: 265 89% 78% / #C17BFF /
+--accent: 172 66% 50% / #20E3B2 /
+--muted: 240 5% 96%
+--radius: 0.75rem
+/ Dark mode adjustments /
+.dark {
+--background: 240 10% 3.9%
+--foreground: 0 0% 98%
+--primary: 265 89% 70%
+--accent: 172 66% 40%
+}
+
+###Components
+- Cards: Rounded corners (0.75rem), subtle shadows
+- Buttons: High contrast, hover states
+- Navigation: Sticky header, bottom nav on mobile
+- Lists: Clean spacing, visual hierarchy
+- Media: 16:9 aspect for cards, 1:1 for thumbnails
+
+###Spacing
+- 4px base unit
+- 16/24/32/48/64px common spacings
+- Consistent padding in containers
+
+###Motion
+- Subtle transitions (200-300ms)
+- Smooth page transitions
+- Micro-interactions on hover/tap
+- Stories-style swipe animations
+
+###Responsive
+- Mobile-first: 320px base
+- Breakpoints: sm:640px, md:768px, lg:1024px, xl:1280px
+- Fluid typography scaling
+- Adaptive layouts

@@ -1,21 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 240 10% 98%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    /* Vibrant primary purple for brand identity */
+    --primary: 265 89% 78%;
+    --primary-foreground: 0 0% 98%;
+    
+    /* Soft secondary for supporting elements */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 10% 3.9%;
+    
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    
+    /* Energetic accent color */
+    --accent: 172 66% 50%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 265 89% 78%;
+    
+    /* Modern chart colors for data visualization */
+    --chart-1: 265 89% 78%;
+    --chart-2: 172 66% 50%;
+    --chart-3: 330 81% 60%;
+    --chart-4: 43 96% 64%;
+    --chart-5: 190 95% 39%;
+    
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Adjusted for dark mode visibility */
+    --primary: 265 89% 70%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 64%;
+    
+    --accent: 172 66% 40%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 265 89% 70%;
+    
+    /* Adjusted chart colors for dark mode */
+    --chart-1: 265 89% 70%;
+    --chart-2: 172 66% 45%;
+    --chart-3: 330 81% 55%;
+    --chart-4: 43 96% 58%;
+    --chart-5: 190 95% 45%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  
+  /* Use Inter font for all text */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-inter tracking-tight font-bold;
+  }
+  
+  body {
+    @apply font-inter;
+  }
 }
