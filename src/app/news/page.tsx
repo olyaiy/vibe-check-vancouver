@@ -23,7 +23,7 @@ export default function NewsPage() {
                   {article.title}
                 </h2>
                 <p className="text-muted-foreground line-clamp-2">
-                  {article.tldr}
+                  {article.tldr.summary}
                 </p>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <span>{article.readTime}</span>

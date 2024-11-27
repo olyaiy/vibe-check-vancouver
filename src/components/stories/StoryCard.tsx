@@ -42,105 +42,107 @@ export function StoryCard({
   const styles = categoryStyles[article.category] || categoryStyles.default;
 
   return (
-    <Card className={cn(
-      "group relative overflow-hidden bg-card hover:bg-accent/5 transition-all duration-300 border-0",
-      className
-    )}>
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={article.imageUrl}
-          alt={article.title}
-          fill
-          priority={priority}
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-        <div className={cn(
-          "absolute inset-0",
-          variant === 'hero' 
-            ? "bg-gradient-to-t from-black/90 via-black/50 to-transparent"
-            : "bg-gradient-to-t from-black/80 to-transparent"
-        )} />
-      </div>
-
-      {/* Content Layout based on variant */}
-      <div className={cn(
-        "relative h-full w-full",
-        variant === 'hero' && "p-8",
-        variant === 'secondary' && "p-6",
-        variant === 'compact' && "p-4"
+    <Link href={`/news/${article.slug}`} className="block">
+      <Card className={cn(
+        "group relative overflow-hidden bg-card hover:bg-accent/5 transition-all duration-300 border-0",
+        className
       )}>
-        {/* Category & Impact Badge */}
-        <div className="flex items-center justify-between mb-auto">
-          <Badge className={cn(
-            "bg-white/10 backdrop-blur-md text-white border-none",
-            variant === 'hero' ? "px-4 py-2" : "px-3 py-1.5"
-          )}>
-            {article.category}
-          </Badge>
-          
-          {variant !== 'compact' && (
-            <Badge variant="secondary" className={getImpactStyles(article.impact)}>
-              {`${article.impact.charAt(0).toUpperCase() + article.impact.slice(1)} Impact`}
-            </Badge>
-          )}
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src={article.imageUrl}
+            alt={article.title}
+            fill
+            priority={priority}
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className={cn(
+            "absolute inset-0",
+            variant === 'hero' 
+              ? "bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+              : "bg-gradient-to-t from-black/80 to-transparent"
+          )} />
         </div>
 
-        {/* Title & Content Area */}
+        {/* Content Layout based on variant */}
         <div className={cn(
-          "absolute bottom-0 left-0 right-0",
+          "relative h-full w-full",
           variant === 'hero' && "p-8",
           variant === 'secondary' && "p-6",
           variant === 'compact' && "p-4"
         )}>
-          <h2 className={cn(
-            "font-bold leading-tight group-hover:text-primary/90 transition-colors",
-            variant === 'hero' && "text-3xl md:text-4xl mb-4",
-            variant === 'secondary' && "text-2xl mb-3",
-            variant === 'compact' && "text-xl mb-2"
+          {/* Category & Impact Badge */}
+          <div className="flex items-center justify-between mb-auto">
+            <Badge className={cn(
+              "bg-white/10 backdrop-blur-md text-white border-none",
+              variant === 'hero' ? "px-4 py-2" : "px-3 py-1.5"
+            )}>
+              {article.category}
+            </Badge>
+            
+            {variant !== 'compact' && (
+              <Badge variant="secondary" className={getImpactStyles(article.impact)}>
+                {`${article.impact.charAt(0).toUpperCase() + article.impact.slice(1)} Impact`}
+              </Badge>
+            )}
+          </div>
+
+          {/* Title & Content Area */}
+          <div className={cn(
+            "absolute bottom-0 left-0 right-0",
+            variant === 'hero' && "p-8",
+            variant === 'secondary' && "p-6",
+            variant === 'compact' && "p-4"
           )}>
-            {article.title}
-          </h2>
+            <h2 className={cn(
+              "font-bold leading-tight group-hover:text-primary/90 transition-colors",
+              variant === 'hero' && "text-3xl md:text-4xl mb-4",
+              variant === 'secondary' && "text-2xl mb-3",
+              variant === 'compact' && "text-xl mb-2"
+            )}>
+              {article.title}
+            </h2>
 
-          {variant !== 'compact' && (
-            <div className="space-y-2 mb-6">
-              <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
-                {article.tldr.summary}
-              </p>
-              {variant === 'hero' && (
-                <ul className="text-white/70 text-xs space-y-1">
-                  {article.tldr.points.slice(0, 2).map((point, index) => (
-                    <li key={index} className="line-clamp-1">• {point}</li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
+            {variant !== 'compact' && (
+              <div className="space-y-2 mb-6">
+                <p className="text-white/80 text-sm leading-relaxed line-clamp-2">
+                  {article.tldr.summary}
+                </p>
+                {variant === 'hero' && (
+                  <ul className="text-white/70 text-xs space-y-1">
+                    {article.tldr.points.slice(0, 2).map((point, index) => (
+                      <li key={index} className="line-clamp-1">• {point}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
 
-          {/* Metadata Footer */}
-          <div className="flex items-center justify-between text-sm text-white/80">
-            <div className="flex items-center gap-4">
-              {variant === 'hero' && (
-                <>
-                  <span className="flex items-center gap-1.5">
-                    <Eye className="h-4 w-4" />
-                    {formatNumber(article.viewCount)}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <MessageCircle className="h-4 w-4" />
-                    {article.commentCount}
-                  </span>
-                </>
-              )}
-              <span className="flex items-center gap-1.5">
-                <CalendarDays className="h-4 w-4" />
-                {new Date(article.publishedAt).toLocaleDateString()}
-              </span>
+            {/* Metadata Footer */}
+            <div className="flex items-center justify-between text-sm text-white/80">
+              <div className="flex items-center gap-4">
+                {variant === 'hero' && (
+                  <>
+                    <span className="flex items-center gap-1.5">
+                      <Eye className="h-4 w-4" />
+                      {formatNumber(article.viewCount)}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <MessageCircle className="h-4 w-4" />
+                      {article.commentCount}
+                    </span>
+                  </>
+                )}
+                <span className="flex items-center gap-1.5">
+                  <CalendarDays className="h-4 w-4" />
+                  {new Date(article.publishedAt).toLocaleDateString()}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </Link>
   );
 }
 
