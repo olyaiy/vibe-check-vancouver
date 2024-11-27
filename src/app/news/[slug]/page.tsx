@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { mockArticles } from "@/lib/data/mock-articles";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,89 @@ function getImpactStyles(impact: string) {
     impact === 'medium' ? 'bg-yellow-500/20 text-yellow-100' :
     'bg-blue-500/20 text-blue-100'
   );
+}
+
+export async function generateMetadata({ params }: NewsArticlePageProps): Promise<Metadata> {
+  const article = mockArticles.find((article) => article.slug === params.slug);
+  
+  if (!article) {
+    return {
+      title: 'Article Not Found | Vibe Check Vancouver',
+      description: 'The requested article could not be found.',
+    };
+  }
+
+  // Format publish date for structured data
+  const publishDate = new Date(article.publishedAt).toISOString();
+  const updateDate = new Date(article.updatedAt).toISOString();
+
+  return {
+    title: article.title,
+    description: article.tldr.summary,
+    keywords: [
+      ...article.tags,
+      article.category,
+      article.neighborhood,
+      'Vancouver news',
+      'local news',
+      'Gen Z news'
+    ].join(', '),
+    authors: [{ name: article.author.name }],
+    openGraph: {
+      title: article.title,
+      description: article.tldr.summary,
+      type: 'article',
+      publishedTime: publishDate,
+      modifiedTime: updateDate,
+      authors: [article.author.name],
+      images: [{
+        url: article.imageUrl,
+        width: 1200,
+        height: 630,
+        alt: article.title,
+      }],
+      tags: article.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.tldr.summary,
+      images: [article.imageUrl],
+    },
+    alternates: {
+      canonical: `https://vibecheckvancouver.ca/news/${article.slug}`,
+    },
+    // Schema.org structured data for news articles
+    other: {
+      'schema:NewsArticle': JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        headline: article.title,
+        description: article.tldr.summary,
+        image: article.imageUrl,
+        datePublished: publishDate,
+        dateModified: updateDate,
+        author: [{
+          '@type': 'Person',
+          name: article.author.name,
+        }],
+        publisher: {
+          '@type': 'Organization',
+          name: 'Vibe Check Vancouver',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://vibecheckvancouver.ca/logo.png'
+          }
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `https://vibecheckvancouver.ca/news/${article.slug}`,
+        },
+        articleSection: article.category,
+        keywords: article.tags.join(', '),
+      })
+    }
+  };
 }
 
 export default function NewsArticlePage({ params }: NewsArticlePageProps) {
