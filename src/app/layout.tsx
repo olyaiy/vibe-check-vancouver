@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -34,7 +36,6 @@ export const metadata: Metadata = {
     images: ["https://vibecheckvancouver.com/og-image.jpg"],
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,8 +43,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
-      <body className="min-h-screen bg-background text-foreground antialiased font-inter">
-        {children}
+      <body className="min-h-screen bg-background text-foreground antialiased font-inter flex flex-col">
+        <Navbar />
+        <div className="flex-1">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );

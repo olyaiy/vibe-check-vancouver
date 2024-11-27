@@ -48,16 +48,18 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <main className="flex flex-col items-center w-full max-w-7xl mx-auto px-4 gap-8 pb-8 min-h-screen">
+      {/* Trending Topics (Client Component) */}
+      <section className="w-full mt-6">
+        <TrendingTopics />
+      </section>
+      
+      
       {/* Hero Section */}
-      <section className="w-full pt-4">
+      <section className="w-full -mt-6">
         <FeaturedStory />
       </section>
 
-      {/* Trending Topics (Client Component) */}
-      <section className="w-full -mt-6">
-        <h6 className="text-2xl font-bold mb-4 mt-0 pt-0">What&apos;s Buzzing 🔥</h6>
-        <TrendingTopics />
-      </section>
+      
 
       {/* Latest Stories Grid */}
       <section className="w-full">
@@ -66,10 +68,10 @@ export default async function Home() {
       </section>
 
       {/* Neighborhood Spotlight */}
-      <section className="w-full">
+      {/* <section className="w-full">
         <h2 className="text-2xl font-bold mb-4">Your Hood&apos;s Mood 📍</h2>
         <NeighborhoodSpotlight />
-      </section>
+      </section> */}
     </main>
   );
 }
