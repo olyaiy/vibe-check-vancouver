@@ -1,10 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { mockArticles } from "@/lib/data/mock-articles";
+
 import { Badge } from "@/components/ui/badge";
 import { Eye, MessageCircle, Share2, Bookmark } from "lucide-react";
 import { formatNumber } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { mockArticles } from "@/lib/data/mock-articles";
 
 interface NewsArticlePageProps {
   params: {
