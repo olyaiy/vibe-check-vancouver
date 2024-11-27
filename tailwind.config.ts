@@ -57,9 +57,10 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		fontFamily: {
-  			inter: ['Inter', 'sans-serif'],
-  		},
-  	}
+  			sans: ['var(--font-satoshi)'],
+  			display: ['var(--font-clash)'],
+      },
+    },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
