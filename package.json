@@ -36,6 +36,10 @@
     "typescript": "^5"
   },
   "overrides": {
-    "react-is": "^19.0.0-rc-69d4b800-20241021"
+    "react-is": "^19.0.0-rc-69d4b800-20241021",
+    "framer-motion": {
+      "react": "^19.0.0-rc-69d4b800-20241021",
+      "react-dom": "^19.0.0-rc-69d4b800-20241021"
+    }
   }
 }
