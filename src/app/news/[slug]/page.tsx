@@ -15,14 +15,15 @@ interface NewsArticlePageProps {
 function getImpactStyles(impact: string) {
   return cn(
     "backdrop-blur-md border-none px-3 py-1.5 rounded-full",
-    impact === 'high' ? 'bg-red-500/20 text-red-100' :
-    impact === 'medium' ? 'bg-yellow-500/20 text-yellow-100' :
-    'bg-blue-500/20 text-blue-100'
+    impact === "high" ? "bg-red-500/20 text-red-100" :
+    impact === "medium" ? "bg-yellow-500/20 text-yellow-100" :
+    "bg-blue-500/20 text-blue-100"
   );
 }
 
 export async function generateMetadata({ params }: NewsArticlePageProps): Promise<Metadata> {
-  const article = mockArticles.find((article) => article.slug === params.slug);
+  const slug = params.slug;
+  const article = mockArticles.find((article) => article.slug === slug);
   
   if (!article) {
     return {
@@ -104,8 +105,9 @@ export async function generateMetadata({ params }: NewsArticlePageProps): Promis
   };
 }
 
-export default function NewsArticlePage({ params }: NewsArticlePageProps) {
-  const article = mockArticles.find((article) => article.slug === params.slug);
+export default async function NewsArticlePage({ params }: NewsArticlePageProps) {
+  const slug = params.slug;
+  const article = mockArticles.find((article) => article.slug === slug);
 
   if (!article) {
     notFound();
